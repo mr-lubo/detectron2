@@ -53,7 +53,7 @@ class DensePoseOutputsVertexVisualizer(object):
         )
         self.class_to_mesh_name = get_class_to_mesh_name_mapping(cfg)
         self.embedder = build_densepose_embedder(cfg)
-        self.device = torch.device(device)
+        self.device = torch.device(cfg.MODEL.DEVICE)
         self.default_class = default_class
 
         self.mesh_vertex_embeddings = {
@@ -161,7 +161,7 @@ class DensePoseOutputsTextureVisualizer(DensePoseOutputsVertexVisualizer):
                 self.alpha_dict[mesh_name] = texture_atlases_dict[mesh_name].sum(axis=-1) > 0
                 self.texture_image_dict[mesh_name] = texture_atlases_dict[mesh_name]
 
-        self.device = torch.device(device)
+        self.device = torch.device(cfg.MODEL.DEVICE)
         self.class_to_mesh_name = get_class_to_mesh_name_mapping(cfg)
         self.default_class = default_class
 
